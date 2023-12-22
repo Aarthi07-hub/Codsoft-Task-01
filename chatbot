@@ -1,0 +1,51 @@
+import re
+
+class RuleBasedChatbot:
+    def __init__(self):
+        self.rules = [
+           {'pattern': r'hi|hello|hey', 'response': 'Hello! How can I help you?'},
+            {'pattern': r'bye|goodbye', 'response': 'Goodbye! Have a great day!'},
+            {'pattern': r'how are you', 'response': 'I am a chatbot. I don\'t have feelings, but thanks for asking!'},
+            {'pattern': r'your name|who are you', 'response': 'I am a Rule-Based Chatbot.'},
+            {'pattern': r'weather', 'response': 'I\'m sorry, I cannot provide real-time weather information.'},
+            {'pattern': r'time', 'response': 'I don\'t have a clock, but you can check the current time on your device.'},
+            {'pattern': r'joke', 'response': 'Why don\'t scientists trust atoms? Because they make up everything!'},
+            {'pattern': r'how old are you', 'response': 'I don\'t have an age. I\'m a computer program.'},
+            {'pattern': r'thanks|thank you', 'response': 'You\'re welcome! If you have more questions, feel free to ask.'},
+            {'pattern': r'age|old are you', 'response': 'I don\'t age. I\'m forever young in the digital world.'},
+            {'pattern': r'help', 'response': 'I\'m here to assist you. Feel free to ask me anything!'},
+            {'pattern': r'love', 'response': 'I\'m not capable of feeling love, but I\'m here to provide information and assistance.'},
+            {'pattern': r'who created you', 'response': 'I was created by developers using Python and various libraries.'},
+            {'pattern': r'favorite color', 'response': 'I don\'t have a favorite color. Colors are beyond my digital perceptions.'},
+            # Add more rules as needed
+        ]
+
+    def respond(self, user_message):
+        for rule in self.rules:
+            pattern = re.compile(rule['pattern'], re.IGNORECASE)
+            if re.search(pattern, user_message):
+                return rule['response']
+
+        # Default response if no rule matches
+        return 'I\'m sorry, I didn\'t understand that.'
+
+# Example usage
+def main():
+    print("Rule-Based Chatbot: Hello! Type 'bye' to exit.")
+    chatbot = RuleBasedChatbot()
+
+    while True:
+        user_input = input('You: ')
+
+        if user_input.lower() in ['exit', 'quit', 'bye']:
+            print('Rule-Based Chatbot: Goodbye!')
+            break
+
+        try:
+            response = chatbot.respond(user_input)
+            print('Rule-Based Chatbot:', response)
+        except Exception as e:
+            print('Error:', str(e))
+
+if __name__ == "__main__":
+    main()
